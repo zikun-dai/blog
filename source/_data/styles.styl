@@ -1,0 +1,85 @@
+/* ===== Home posts: card + tab-like title ===== */
+
+/* Make each post block a "card". */
+.posts-expand .post-block
+  position: relative
+  margin: 1.6rem 0
+  padding: 1.4rem 1.6rem 1.6rem
+  border: 1px solid rgba(0, 0, 0, .08)
+  border-radius: 14px
+  background: var(--content-bg-color, #fff)
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .06)
+  transition: transform .18s ease, box-shadow .18s ease
+
+@media (min-width: 768px)
+  .content.index.posts-expand .post-block
+    max-width: 580px
+    margin-left: auto
+    margin-right: auto
+
+/* Hover feels more like a clickable card. */
+.posts-expand .post-block:hover
+  transform: translateY(-2px)
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .10)
+
+/* Tab bar effect: use the title as the tab header. */
+.posts-expand .post-header
+  margin: 0 0 1rem
+  padding-bottom: .8rem
+  border-bottom: 1px solid rgba(0, 0, 0, .06)
+
+/* Make the title look like a raised tab. */
+.posts-expand .post-title
+  display: inline-block
+  margin: 0
+  padding: .35rem .9rem
+  border-radius: 12px
+  background: transparent
+  transform: translateY(1px)
+
+.posts-expand .post-header
+  text-align: center
+
+/* Separate summary/body from the tab header a bit. */
+.posts-expand .post-body
+  margin-top: .2rem
+
+/* Tighten spacing between meta date and description on index cards. */
+.posts-expand .post-meta
+  margin-bottom: .35rem
+
+.posts-expand .post-description
+  margin-top: .35rem
+  text-align: center
+
+/* Index excerpt description is rendered as a plain <p>. */
+.posts-expand .post-body > p:first-child
+  text-align: center
+
+/* Match sidebar container corners to post cards. */
+.sidebar-inner
+  border-radius: 14px
+  overflow: hidden
+
+/* Header/nav container: square top, rounded bottom. */
+.header-inner
+  border-radius: 0 0 14px 14px
+  overflow: hidden
+
+/* Tighten padding on small screens. */
++tablet-mobile()
+  .posts-expand .post-block
+    padding: 1.1rem 1.1rem 1.2rem
+
+/* Dark mode: make inline code dark without affecting code blocks. */
+if (hexo-config('darkmode'))
+  @media (prefers-color-scheme: dark)
+    .posts-expand .post-header
+      border-bottom-color: rgba(255, 255, 255, .12)
+
+    .posts-expand .post-title
+      background: transparent
+
+    .post-body :not(pre) > code
+      background: #2b2b2b
+      color: #e6e6e6
