@@ -40,12 +40,8 @@ description: 鼠标选购
 
   - 雷蛇proclick mini
 
-3. 
-
 ### 游戏鼠标
 
 1. rog月刃2 RGB
    
    有rgb灯效（滚轮、侧裙、rog logo三个地方），按键不静音，微动热插拔，用个10年应该不成问题
-
-2. 
