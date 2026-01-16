@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Personal notes and articles."><title>ubuntu | Jake&#39;s Personal Blog</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet"><style>:root{color-scheme:light;--bg: #f7f3ee;--surface: #fffaf2;--text: #1c1a17;--muted: #6f665b;--accent: #c4572e;--border: #e4dccf;--shadow: 0 12px 30px rgba(30, 24, 18, .08);--callout-note: #f0f6ff;--callout-tip: #eefaf2;--callout-warning: #fff6e6;--callout-danger: #ffecec}*,*:before,*:after{box-sizing:border-box}body{margin:0;font-family:"Source Sans 3",Helvetica Neue,Arial,sans-serif;background:radial-gradient(circle at top left,#fdf7ef,#f7f3ee,#f1ebe2);color:var(--text);line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}header.site-header{padding:2.5rem 1.5rem 1.5rem;border-bottom:1px solid var(--border);background:#fffaf2e6;backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}.site-title{font-family:Spectral,Georgia,serif;font-weight:700;font-size:1.8rem;margin:0}.site-nav{margin-top:.75rem;display:flex;gap:1.25rem;flex-wrap:wrap;font-size:.95rem}main{max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem}.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.5rem;box-shadow:var(--shadow)}.post-list{display:grid;gap:1.25rem}.post-meta{color:var(--muted);font-size:.9rem}.post-title{font-family:Spectral,Georgia,serif;font-size:1.6rem;margin:.25rem 0 .5rem}.post-content{font-size:1.05rem}.tag-list{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 0;padding:0;list-style:none}.tag{border:1px solid var(--border);border-radius:999px;padding:.2rem .7rem;font-size:.85rem;background:#fff}.callout{border-left:4px solid var(--accent);padding:.75rem 1rem;border-radius:12px;margin:1rem 0;background:var(--callout-note)}.callout-tip{background:var(--callout-tip);border-left-color:#338a55}.callout-warning{background:var(--callout-warning);border-left-color:#d28b26}.callout-danger{background:var(--callout-danger);border-left-color:#c73b3b}footer.site-footer{margin-top:4rem;color:var(--muted);font-size:.9rem;text-align:center;padding-bottom:2rem}@media(max-width:720px){header.site-header{position:static}.site-title{font-size:1.5rem}main{padding:1.5rem 1.25rem 3rem}}
+</style></head> <body> <header class="site-header"> <div class="site-title">Jake&#39;s Personal Blog</div> <nav class="site-nav"> <a href="/">Home</a> <a href="/tags/">Tags</a> <a href="/categories/">Categories</a> </nav> </header> <main>  <article class="card post-content"> <p class="post-meta"> 2026/1/16  </p> <h1 class="post-title">ubuntu</h1> <ul class="tag-list"> <li class="tag">tech</li> </ul> <h3 id="双系统策略">双系统策略<a aria-hidden="true" tabindex="-1" href="#双系统策略"><span class="icon icon-link"></span></a></h3>
+<blockquote>
+<p>win：有鼠标驱动，但复现实验需要在wsl中，访问Ubuntu文档也需要wsl</p>
+<p>Ubuntu：复现实验方便，能直接访问win文件，只有板载驱动/网页驱动能够正常用</p>
+</blockquote>
+<ul>
+<li>
+<p>Windows下使用wsl</p>
+<p>终端启动wsl之后，文件管理器中输入<code>\\wsl$</code>可以直接访问<code>/home/wsl-jake/</code></p>
+<p>vscode</p>
+</li>
+<li>
+<p>双系统</p>
+<p><strong>同一块硬盘</strong></p>
+<p>很麻烦，Ubuntu可以访问win文件，但没有鼠标驱动</p>
+<p>win无法访问Ubuntu</p>
+<p><strong>不同硬盘</strong></p>
+<p>win可以访问Ubuntu了，但也只是在WSL里挂载，不如直接在WSL里创建环境</p>
+</li>
+</ul> </article>  </main> <footer class="site-footer">Built with Astro.</footer> </body></html>
