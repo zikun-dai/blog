@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts");
+const categories = new Map();
+
+for (const post of posts) {
+  for (const category of post.data.categories ?? []) {
+    const list = categories.get(category) ?? [];
+    list.push(post);
+    categories.set(category, list);
+  }
+}
+
+const sortedCategories = Array.from(categories.entries()).sort((a, b) =>
+  a[0].localeCompare(b[0])
+);
+---
+
+<BaseLayout title="Categories">
+  <section class="post-list">
+    {sortedCategories.map(([category, list]) => (
+      <article class="card">
+        <h2 class="post-title">
+          <a href={`/categories/${encodeURIComponent(category)}/`}>{category}</a>
+        </h2>
+        <p class="post-meta">{list.length} posts</p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

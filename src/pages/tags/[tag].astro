@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const tagSet = new Set();
+
+  for (const post of posts) {
+    for (const tag of post.data.tags ?? []) {
+      tagSet.add(tag);
+    }
+  }
+
+  return Array.from(tagSet).map((tag) => ({
+    params: { tag },
+    props: { tag, posts },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+const taggedPosts = posts.filter((post) =>
+  (post.data.tags ?? []).includes(tag)
+);
+---
+
+<BaseLayout title={`Tag: ${tag}`}>
+  <section class="post-list">
+    {taggedPosts.map((post) => (
+      <article class="card">
+        <div class="post-meta">
+          {post.data.pubDate.toLocaleDateString("zh-CN")}
+        </div>
+        <h2 class="post-title">
+          <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+        </h2>
+      </article>
+    ))}
+  </section>
+</BaseLayout>
