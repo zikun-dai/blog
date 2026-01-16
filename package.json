@@ -6,7 +6,8 @@
     "test": "astro check",
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "deploy": "astro build && gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,9 @@
     "remark-directive": "^4.0.0",
     "remark-gfm": "^4.0.1",
     "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   },
   "type": "module"
 }

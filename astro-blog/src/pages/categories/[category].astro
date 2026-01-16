@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const categorySet = new Set();
+
+  for (const post of posts) {
+    for (const category of post.data.categories ?? []) {
+      categorySet.add(category);
+    }
+  }
+
+  return Array.from(categorySet).map((category) => ({
+    params: { category },
+    props: { category, posts },
+  }));
+}
+
+const { category, posts } = Astro.props;
+const categoryPosts = posts.filter((post) =>
+  (post.data.categories ?? []).includes(category)
+);
+---
+
+<BaseLayout title={`Category: ${category}`}>
+  <section class="post-list">
+    {categoryPosts.map((post) => (
+      <article class="card">
+        <div class="post-meta">
+          {post.data.pubDate.toLocaleDateString("zh-CN")}
+        </div>
+        <h2 class="post-title">
+          <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+        </h2>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

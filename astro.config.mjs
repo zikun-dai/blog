@@ -9,6 +9,7 @@ import remarkCallouts from './src/plugins/remark-callouts.mjs';
 
 export default defineConfig({
   site: 'https://zikun-dai.github.io/blog/',
+  // base: '/blog',
   integrations: [mdx(), sitemap()],
   markdown: {
     remarkPlugins: [remarkGfm, remarkDirective, remarkCallouts],
