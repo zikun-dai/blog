@@ -1,1 +1,1 @@
-我重构了一下文件结构，我新建了一个hexo-blog存放之前的代码，把astro-blog内容复制到了blog.git下代替之前的，但是现在无法npm run deploy一键部署，帮我部署到gh-page
+<!-- 我重构了一下文件结构，我新建了一个hexo-blog存放之前的代码，把astro-blog内容复制到了blog.git下代替之前的，但是现在无法npm run deploy一键部署，帮我部署到gh-page -->

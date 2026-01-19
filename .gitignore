@@ -1,8 +1,21 @@
 .DS_Store
 Thumbs.db
-db.json
 *.log
+
+# Dependencies
 node_modules/
-public/
+
+# Astro build output and cache
+dist/
+.astro/
+
+# Local env/config
+.env
+.env.*
+
+# Deployment artifacts
 .deploy*/
-_multiconfig.yml
+
+# Legacy or unrelated content moved out of main app
+astro-blog/
+hexo-blog/
