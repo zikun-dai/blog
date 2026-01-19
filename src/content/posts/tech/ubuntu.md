@@ -4,28 +4,20 @@ pubDate: 2026-01-15 22:42:29
 tags: [tech]
 ---
 
+## 双系统策略
 
+### Windows + WSL
+- Windows 有鼠标驱动。
+- 复现实验需要在 WSL；访问 Ubuntu 文件也需 WSL。
+- 进入 WSL 后，文件管理器输入 `\\wsl$` 可访问 `/home/wsl-jake/`。
+- VSCode 可直接连接 WSL 目录。
 
-### 双系统策略
+### 双系统
 
-> win：有鼠标驱动，但复现实验需要在wsl中，访问Ubuntu文档也需要wsl
->
-> Ubuntu：复现实验方便，能直接访问win文件，只有板载驱动/网页驱动能够正常用
+#### 同一块硬盘
+- Ubuntu 可访问 Windows 文件，但没有鼠标驱动。
+- Windows 无法访问 Ubuntu。
 
-- Windows下使用wsl
-
-	终端启动wsl之后，文件管理器中输入`\\wsl$`可以直接访问`/home/wsl-jake/`
-
-	vscode
-
-- 双系统
-
-	**同一块硬盘**
-
-	很麻烦，Ubuntu可以访问win文件，但没有鼠标驱动
-
-	win无法访问Ubuntu
-
-	**不同硬盘**
-
-	win可以访问Ubuntu了，但也只是在WSL里挂载，不如直接在WSL里创建环境
+#### 不同硬盘
+- Windows 可以访问 Ubuntu，但多通过 WSL 挂载。
+- 实际上不如直接在 WSL 创建环境。

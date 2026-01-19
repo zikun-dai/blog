@@ -4,15 +4,14 @@ pubDate: 2026-01-17 00:33:51
 tags: [tech]
 description: 一份简单的配置和使用文档
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
-## 快捷指令
+Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or ask on [GitHub](https://github.com/hexojs/hexo/issues).
+
+## 快速指令
 
 :::tip
-
-没有修改插件、主题时无需clean
-
-`npm install`新插件，或者修改了``_config.yml`，最好clean一下
+未修改插件或主题时无需 clean。
+`npm install` 新插件，或修改了 `_config.yml`，建议先 clean 一次。
 :::
 
 ```bash
@@ -26,41 +25,37 @@ hexo clean && hexo g && hexo d
 ```
 
 ```bash
-# 另一种写法(适用于日常添加了新文档，无需clean直接部署)
+# 日常新增文档时，可跳过 clean
 hexo g -d
 ```
 
-
-
 ## 单步指令
 
-### Create a new post
+### 新建文章
 
-``` bash
-$ hexo new "My New Post"
+```bash
+hexo new "My New Post"
 ```
 
 More info: [Writing](https://hexo.io/docs/writing.html)
 
-### Clean caches
+### 清理缓存
 
 ```bash
-# 清除缓存
 hexo clean
 ```
 
-### Run server
+### 启动本地服务
 
-``` bash
-$ hexo server
+```bash
+hexo server
 ```
 
 More info: [Server](https://hexo.io/docs/server.html)
 
-### Generate static files
+### 生成静态文件
 
-``` bash
-# 生成静态页面 (Generate)
+```bash
 hexo generate
 # equal
 hexo g
@@ -68,10 +63,9 @@ hexo g
 
 More info: [Generating](https://hexo.io/docs/generating.html)
 
-### Deploy to remote sites
+### 部署到远端
 
-``` bash
-# 部署到 GitHub (Deploy)
+```bash
 hexo deploy
 # equal
 hexo d
@@ -79,13 +73,11 @@ hexo d
 
 More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)
 
-
-
 ## 初始配置
 
 ### utteranc setting
 
-```bash
+```html
 <script src="https://utteranc.es/client.js"
         repo="zikun-dai/blog"
         issue-term="pathname"

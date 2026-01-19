@@ -2,13 +2,12 @@
 title: master4
 pubDate: 2026-01-13 14:50:26
 tags: [buy]
-description: 罗技mx master4使用体验
+description: 罗技 MX Master 4 使用体验
 ---
 
-## plugins for logitech mx master4
+## 插件推荐
 
-### sensurf
-
+### Sensurf
 [Sensurf - Boost your flow, feel the web](https://sensurf.app/)
 
 master4加入了taptic engine，软件中默认只在action ring和跨越显示器时提供触感反馈
