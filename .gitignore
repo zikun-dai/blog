@@ -19,3 +19,5 @@ dist/
 # Legacy or unrelated content moved out of main app
 astro-blog/
 hexo-blog/
+
+AGENTS.md

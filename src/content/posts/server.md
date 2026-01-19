@@ -16,6 +16,70 @@ description: 实验室服务器配置指南的更新版，新增Windows和wsl的
 原文链接：[NJU-3DV 实验室服务器使用与配置手册](https://stingy-basin-115.notion.site/NJU-3DV-d9f0de862cbd4b9f9c12b5474cac76e1)
 :::
 
+
+
+
+
+## 以下配置有问题，先不要用
+
+### 0)配置VPN
+
+- 直接开启vpn的tun模式
+
+> [!TIP]
+>
+> 尽量不要设置全局的http环境变量，需要下载huggingface、GitHub时开一下tun模式，这样最干净；
+>
+> 或者需要时临时设置一下export
+
+> [!CAUTION]
+>
+> win有时tun用不了codex，可以换个节点试试，大多数时候能用；mac只能使用代理模式，tun没网；虚拟机只能使用tun，代理模式用不了ai）
+
+
+
+- 也可以修改环境变量
+
+  ```bash
+  # 最好添加到.bashrc里
+  export http_proxy=http://127.0.0.1:7890
+  # export http_proxy=http://10.48.5.165:7890	# server端clash允许局域网，client端export之后可以借网
+  export https_proxy=$http_proxy
+  export ALL_PROXY=$http_proxy
+  ```
+
+  或者直接在`用户`环境变量里改
+
+  > 查看当前环境变量
+  >
+  > ```bash
+  > # powershell
+  > $env:http_proxy
+  > $env:https_proxy
+  > $env:all_proxy
+  > # wsl/Ubuntu
+  > echo $http_proxy
+  > echo $https_proxy
+  > echo $all_proxy
+  > ```
+  >
+  > 取消设定环境变量
+  >
+  > ```bash
+  > # Windows下·需要在`用户`环境变量里清空，然后重新打开终端
+  > 
+  > # wsl/ubuntu在.bashrc里删除相关的，然后`source ~/.bashrc`或重开终端
+  > ```
+
+- 测试连通性
+
+  ```bash
+  curl https://www.google.com # 可选-v，显示更简洁
+  # ping不走http协议，只有tun模式能ping通
+  ```
+
+  
+
 ### 1) 安装 Miniforge（替代 Miniconda）
 
 在 WSL2 / Ubuntu 终端执行：
@@ -45,8 +109,15 @@ rm -f ~/miniforge3/miniforge.sh
 
 ```bash
 ~/miniforge3/bin/conda init bash
+# ~/miniconda3/bin/conda init bash	#用于切换miniconda3和miniforge3，只影响`~/.bash
 exec bash
 ```
+
+> [!CAUTION]
+>
+> 目前forge3一个很大的问题是`Failed to connect to repo.anaconda.com port 443`（安装scan2BIM时报错）
+>
+> 普通创建一个py313_env时没有问题
 
 重开后你如果看到命令行前面有 `(base)`，就和你截图里“安装成功”的判据一致了。
 
@@ -155,3 +226,82 @@ pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/si
 pip config set global.extra-index-url https://pypi.org/simple
 ```
 
+
+
+
+
+# 删除miniforge3
+
+## 0) 先确认你 Miniforge 装在哪（别删错）
+
+在 WSL 里：
+
+```bash
+conda info --base
+```
+
+它会输出 base 目录（比如 `/home/wsl-jake/miniforge3`）。后面我用这个路径叫 `$BASE`。
+
+------
+
+## 1) 可选：备份环境列表/导出（以防想迁移）
+
+```bash
+conda env list
+# 需要的话导出某个环境
+# conda env export -n <envname> > <envname>.yml
+```
+
+------
+
+## 2) 撤销 conda init（把 .bashrc 里那段初始化删掉）
+
+在你删目录之前做这个最省事：
+
+```bash
+conda init --reverse bash
+exec bash
+```
+
+`conda init` 官方文档明确有 `--reverse`，作用是“撤消上次 conda init 的效果”。([docs.conda.org.cn](https://docs.conda.org.cn/projects/conda/en/stable/commands/init.html))
+
+> 如果你用的是 zsh，就把 `bash` 换成 `zsh`。
+
+**如果这一步报错（conda 已经不能用了）**
+那就手动编辑 `~/.bashrc`，删掉这段（整段删除）：
+
+- `# >>> conda initialize >>>`
+- `# <<< conda initialize <<<`
+
+------
+
+## 3) 删除 Miniforge 安装目录（卸载本体）
+
+假设 `conda info --base` 输出的是 `~/miniforge3`：
+
+```bash
+rm -rf ~/miniforge3
+```
+
+------
+
+## 4) 清理残留（建议做，避免以后奇怪的 channel/缓存问题）
+
+```bash
+rm -f ~/.condarc
+rm -rf ~/.conda ~/.mamba
+```
+
+------
+
+## 6) 验证
+
+```bash
+which conda
+conda --version
+mamba --version
+```
+
+------
+
+如果你把 `conda info --base` 的输出贴一下（就一行路径），我也可以按你实际的安装目录把“删除哪些文件/目录”再精准一点列出来。
