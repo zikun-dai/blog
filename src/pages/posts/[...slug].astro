@@ -12,6 +12,14 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+const resolveHero = () => {
+  const hero = post.data.heroImage;
+  if (!hero) return null;
+  if (hero.startsWith("http://") || hero.startsWith("https://")) return hero;
+  if (hero.startsWith("/")) return hero;
+  return `/posts/${post.slug}/${hero}`;
+};
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
@@ -23,6 +31,15 @@ const { Content } = await post.render();
       )}
     </p>
     <h1 class="post-title">{post.data.title}</h1>
+    {resolveHero() && (
+      <img
+        class="post-hero"
+        src={resolveHero()}
+        alt={post.data.title}
+        loading="lazy"
+        decoding="async"
+      />
+    )}
     {post.data.tags && (
       <ul class="tag-list">
         {post.data.tags.map((tag) => (

@@ -11,6 +11,8 @@
   --callout-tip: #eefaf2;
   --callout-warning: #fff6e6;
   --callout-danger: #ffecec;
+  --callout-important: #ffeef2;
+  --callout-caution: #fff1db;
 }
 
 *,
@@ -95,6 +97,15 @@ main {
   font-size: 1.05rem;
 }
 
+.post-hero {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  margin: 1rem 0 1.25rem;
+  display: block;
+  object-fit: cover;
+}
+
 .tag-list {
   display: flex;
   gap: 0.5rem;
@@ -110,6 +121,41 @@ main {
   padding: 0.2rem 0.7rem;
   font-size: 0.85rem;
   background: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+table thead th {
+  text-align: left;
+  font-weight: 700;
+  color: var(--text);
+  padding: 0.8rem 0.9rem;
+  border-right: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+  background: #f1e7d8;
+}
+
+table tbody td {
+  padding: 0.75rem 0.9rem;
+  border-right: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+}
+
+table thead th:last-child,
+table tbody td:last-child {
+  border-right: none;
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .callout {
@@ -133,6 +179,16 @@ main {
 .callout-danger {
   background: var(--callout-danger);
   border-left-color: #c73b3b;
+}
+
+.callout-important {
+  background: var(--callout-important);
+  border-left-color: #b54a3a;
+}
+
+.callout-caution {
+  background: var(--callout-caution);
+  border-left-color: #c9851d;
 }
 
 footer.site-footer {

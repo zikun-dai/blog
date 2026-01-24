@@ -4,10 +4,12 @@
   "main": "index.js",
   "scripts": {
     "test": "astro check",
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "deploy": "astro build && gh-pages -d dist"
+    "sync:post-assets": "node scripts/sync-post-assets.mjs",
+    "ensure:frontmatter": "node scripts/ensure-frontmatter.mjs",
+    "dev": "npm run ensure:frontmatter && npm run sync:post-assets && astro dev",
+    "build": "npm run ensure:frontmatter && npm run sync:post-assets && astro build",
+    "preview": "npm run ensure:frontmatter && npm run sync:post-assets && astro preview",
+    "deploy": "npm run ensure:frontmatter && npm run sync:post-assets && astro build && gh-pages -d dist"
   },
   "keywords": [],
   "author": "",

@@ -5,12 +5,29 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("posts")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const resolveHero = (post) => {
+  const hero = post.data.heroImage;
+  if (!hero) return null;
+  if (hero.startsWith("http://") || hero.startsWith("https://")) return hero;
+  if (hero.startsWith("/")) return hero;
+  return `/posts/${post.slug}/${hero}`;
+};
 ---
 
 <BaseLayout title="Home">
   <section class="post-list">
     {posts.map((post) => (
       <article class="card">
+        {resolveHero(post) && (
+          <img
+            class="post-hero"
+            src={resolveHero(post)}
+            alt={post.data.title}
+            loading="lazy"
+            decoding="async"
+          />
+        )}
         <div class="post-meta">
           {post.data.pubDate.toLocaleDateString("zh-CN")}
         </div>

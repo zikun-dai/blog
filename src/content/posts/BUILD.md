@@ -86,3 +86,32 @@ More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)
         async>
 </script>
 ```
+
+# CHANGE LOG:
+
+使用HEXO构建框架；
+调整UI、主题、联系信息等；
+改为使用astro构建框架;
+为src\content\posts增加目录结构识别；
+
+表格样式：
+
+卡片表格
+
+<img src="BUILD/image-20260124195145804.png" alt="image-20260124195145804" style="zoom: 67%;" />
+
+圆角外框 + 内部分隔
+
+<img src="BUILD/image-20260124195258935.png" alt="image-20260124195258935" style="zoom:67%;" />
+
+细分隔线 + 斑马纹
+
+<img src="BUILD/image-20260124195419174.png" alt="image-20260124195419174" style="zoom:67%;" />
+
+强调表头 + 粗边框网格
+
+<img src="BUILD/image-20260124195533188.png" alt="image-20260124195533188"  />
+
+改为圆角：
+
+![image-20260124195757194](BUILD/image-20260124195757194.png)

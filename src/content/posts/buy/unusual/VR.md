@@ -1,3 +1,10 @@
+---
+title: 虚拟现实设备
+pubDate: 2026-01-24 17:36:00
+tags: [buy]
+description: VR 头显与智能眼镜选购
+---
+
 # 虚拟现实设备
 
 ## VR 头显
@@ -77,8 +84,8 @@
 
 ### 基础概念
 
-<img src="VR/DC343907-A2EF-428D-AFB9-CB4BE377D59C.jpeg" alt="我可以置规告诉探结论" style="zoom: 33%;" />
-<img src="VR/2747B109-66B9-4739-BE10-92CEF8DB3585.jpeg" alt="你可以直 拿走" style="zoom: 33%;" />
+<img src="VR/DC343907-A2EF-428D-AFB9-CB4BE377D59C.jpeg" alt="我可以置规告诉探结论" style="zoom: 20%;" />
+<img src="VR/2747B109-66B9-4739-BE10-92CEF8DB3585.jpeg" alt="你可以直 拿走" style="zoom: 20%;" />
 
 | 概念 | 典型特点 | 备注 |
 | --- | --- | --- |
