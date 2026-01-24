@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="LLM Agent使用心得"><title>agent | Jake&#39;s Personal Blog</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet"><style>:root{color-scheme:light;--bg: #f7f3ee;--surface: #fffaf2;--text: #1c1a17;--muted: #6f665b;--accent: #c4572e;--border: #e4dccf;--shadow: 0 12px 30px rgba(30, 24, 18, .08);--callout-note: #f0f6ff;--callout-tip: #eefaf2;--callout-warning: #fff6e6;--callout-danger: #ffecec;--callout-important: #ffeef2;--callout-caution: #fff1db}*,*:before,*:after{box-sizing:border-box}body{margin:0;font-family:"Source Sans 3",Helvetica Neue,Arial,sans-serif;background:radial-gradient(circle at top left,#fdf7ef,#f7f3ee,#f1ebe2);color:var(--text);line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}header.site-header{padding:2.5rem 1.5rem 1.5rem;border-bottom:1px solid var(--border);background:#fffaf2e6;backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}.site-title{font-family:Spectral,Georgia,serif;font-weight:700;font-size:1.8rem;margin:0}.site-nav{margin-top:.75rem;display:flex;gap:1.25rem;flex-wrap:wrap;font-size:.95rem}main{max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem}.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.5rem;box-shadow:var(--shadow)}.post-list{display:grid;gap:1.25rem}.post-meta{color:var(--muted);font-size:.9rem}.post-title{font-family:Spectral,Georgia,serif;font-size:1.6rem;margin:.25rem 0 .5rem}.post-content{font-size:1.05rem}.post-hero{width:100%;height:auto;border-radius:16px;margin:1rem 0 1.25rem;display:block;object-fit:cover}.tag-list{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 0;padding:0;list-style:none}.tag{border:1px solid var(--border);border-radius:999px;padding:.2rem .7rem;font-size:.85rem;background:#fff}table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:2px solid var(--border);border-radius:12px;overflow:hidden}table thead th{text-align:left;font-weight:700;color:var(--text);padding:.8rem .9rem;border-right:2px solid var(--border);border-bottom:2px solid var(--border);background:#f1e7d8}table tbody td{padding:.75rem .9rem;border-right:2px solid var(--border);border-bottom:2px solid var(--border)}table thead th:last-child,table tbody td:last-child{border-right:none}table tbody tr:last-child td{border-bottom:none}.callout{border-left:4px solid var(--accent);padding:.75rem 1rem;border-radius:12px;margin:1rem 0;background:var(--callout-note)}.callout-tip{background:var(--callout-tip);border-left-color:#338a55}.callout-warning{background:var(--callout-warning);border-left-color:#d28b26}.callout-danger{background:var(--callout-danger);border-left-color:#c73b3b}.callout-important{background:var(--callout-important);border-left-color:#b54a3a}.callout-caution{background:var(--callout-caution);border-left-color:#c9851d}footer.site-footer{margin-top:4rem;color:var(--muted);font-size:.9rem;text-align:center;padding-bottom:2rem}@media(max-width:720px){header.site-header{position:static}.site-title{font-size:1.5rem}main{padding:1.5rem 1.25rem 3rem}}
+</style></head> <body> <header class="site-header"> <div class="site-title">Jake&#39;s Personal Blog</div> <nav class="site-nav"> <a href="/">Home</a> <a href="/tags/">Tags</a> <a href="/categories/">Categories</a> </nav> </header> <main>  <article class="card post-content"> <p class="post-meta"> 2026/1/14  </p> <h1 class="post-title">agent</h1>  <ul class="tag-list"> <li class="tag">tech</li> </ul> <h2 id="openai">OpenAI<a aria-hidden="true" tabindex="-1" href="#openai"><span class="icon icon-link"></span></a></h2>
+<h3 id="chatgpt-网页端">ChatGPT 网页端<a aria-hidden="true" tabindex="-1" href="#chatgpt-网页端"><span class="icon icon-link"></span></a></h3>
+<div class="callout callout-warning">
+<p>代码相关的问题（pylance 标红、运行报错、虚拟环境、测试脚本等），通过网页端 + 手动执行 + 反馈给 AI 的流程太慢。
+建议直接在 Codex 里让 AI 自己执行命令；如需联网或多工具协作，可考虑 multi-agent。</p>
+<p>委派给 Codex 的 prompt：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>给出基本的背景信息（创建虚拟环境的命令，解决报错后的策略，重新创建还是直接 update）。</span></span>
+<span class="line"><span>如果遇到报错，你自己读取报错信息并进行解决。</span></span>
+<span class="line"><span>解决问题之后继续安装环境，直到环境彻底安装成功再结束。（最后再指定这个自迭代）</span></span></code></pre>
+</div>
+<div class="callout callout-tip"><p>一般使用 <code>thinking + 网页搜索</code> 即可，pro 思考太慢了。</p></div>
+<ul>
+<li>5.1pro：经常过度思考，耗时长且次数限制。</li>
+<li>5.2pro：还没怎么用过。</li>
+<li>5.2 thinking：建议勾选“网页搜索”，回答更充分；否则可能不思考就快速回答。</li>
+</ul>
+<h3 id="codex">Codex<a aria-hidden="true" tabindex="-1" href="#codex"><span class="icon icon-link"></span></a></h3>
+<div class="callout callout-tip"><p>一般选择代理模式，5.2-codex，推理强度选中（非常简单的修改选低）。
+不希望大改框架时，可在对话框指定“做最小粒度的修改”。</p></div>
+<ul>
+<li>
+<p>insert TODO：非常好用，适合精确定位编辑位置。</p>
+</li>
+<li>
+<p>skills：还没实际用过，听说很夯。</p>
+</li>
+<li>
+<p>云端：很好用，但日常用不到；当前已知问题：</p>
+<ul>
+<li>本地领先于云端时，基于本地修改创建云端任务会失败。</li>
+<li>在本地 Codex 上下文直接切换云端任务会失败，需要新开对话框选择云端。</li>
+<li>云端修改完成后，本地继续让云端修改会报错，只能由本地继续。</li>
+</ul>
+<div class="callout callout-tip">
+<p>不过本地可以直接查看云端进度、完成后也能直接应用云端修改到本地，无需GitHub PR（手机远程时可以选择创建PR新分支）；
+在codex网页端似乎是可以让云端接着改的；</p>
+</div>
+</li>
+</ul>
+<h2 id="gemini">Gemini<a aria-hidden="true" tabindex="-1" href="#gemini"><span class="icon icon-link"></span></a></h2>
+<p>生成软件前，先简单描述需求，让它生成功能需求说明书（PRD），逐步完善想法后再勾选 Canvas 生成页面。</p>
+<div class="callout callout-tip"><p>勾选 Canvas 时最好写明“使用 Canvas 生成网页”。否则可能在正文里插入代码，而不是在 Canvas 预览。</p></div> </article>  </main> <footer class="site-footer">Built with Astro.</footer> </body></html>

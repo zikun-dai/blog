@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="路由器配置"><title>router | Jake&#39;s Personal Blog</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet"><style>:root{color-scheme:light;--bg: #f7f3ee;--surface: #fffaf2;--text: #1c1a17;--muted: #6f665b;--accent: #c4572e;--border: #e4dccf;--shadow: 0 12px 30px rgba(30, 24, 18, .08);--callout-note: #f0f6ff;--callout-tip: #eefaf2;--callout-warning: #fff6e6;--callout-danger: #ffecec;--callout-important: #ffeef2;--callout-caution: #fff1db}*,*:before,*:after{box-sizing:border-box}body{margin:0;font-family:"Source Sans 3",Helvetica Neue,Arial,sans-serif;background:radial-gradient(circle at top left,#fdf7ef,#f7f3ee,#f1ebe2);color:var(--text);line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}header.site-header{padding:2.5rem 1.5rem 1.5rem;border-bottom:1px solid var(--border);background:#fffaf2e6;backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}.site-title{font-family:Spectral,Georgia,serif;font-weight:700;font-size:1.8rem;margin:0}.site-nav{margin-top:.75rem;display:flex;gap:1.25rem;flex-wrap:wrap;font-size:.95rem}main{max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem}.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.5rem;box-shadow:var(--shadow)}.post-list{display:grid;gap:1.25rem}.post-meta{color:var(--muted);font-size:.9rem}.post-title{font-family:Spectral,Georgia,serif;font-size:1.6rem;margin:.25rem 0 .5rem}.post-content{font-size:1.05rem}.post-hero{width:100%;height:auto;border-radius:16px;margin:1rem 0 1.25rem;display:block;object-fit:cover}.tag-list{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 0;padding:0;list-style:none}.tag{border:1px solid var(--border);border-radius:999px;padding:.2rem .7rem;font-size:.85rem;background:#fff}table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:2px solid var(--border);border-radius:12px;overflow:hidden}table thead th{text-align:left;font-weight:700;color:var(--text);padding:.8rem .9rem;border-right:2px solid var(--border);border-bottom:2px solid var(--border);background:#f1e7d8}table tbody td{padding:.75rem .9rem;border-right:2px solid var(--border);border-bottom:2px solid var(--border)}table thead th:last-child,table tbody td:last-child{border-right:none}table tbody tr:last-child td{border-bottom:none}.callout{border-left:4px solid var(--accent);padding:.75rem 1rem;border-radius:12px;margin:1rem 0;background:var(--callout-note)}.callout-tip{background:var(--callout-tip);border-left-color:#338a55}.callout-warning{background:var(--callout-warning);border-left-color:#d28b26}.callout-danger{background:var(--callout-danger);border-left-color:#c73b3b}.callout-important{background:var(--callout-important);border-left-color:#b54a3a}.callout-caution{background:var(--callout-caution);border-left-color:#c9851d}footer.site-footer{margin-top:4rem;color:var(--muted);font-size:.9rem;text-align:center;padding-bottom:2rem}@media(max-width:720px){header.site-header{position:static}.site-title{font-size:1.5rem}main{padding:1.5rem 1.25rem 3rem}}
+</style></head> <body> <header class="site-header"> <div class="site-title">Jake&#39;s Personal Blog</div> <nav class="site-nav"> <a href="/">Home</a> <a href="/tags/">Tags</a> <a href="/categories/">Categories</a> </nav> </header> <main>  <article class="card post-content"> <p class="post-meta"> 2026/1/14  </p> <h1 class="post-title">router</h1>  <ul class="tag-list"> <li class="tag">tech</li> </ul> <h2 id="路由器基础--计网复习">路由器基础 &#x26; 计网复习<a aria-hidden="true" tabindex="-1" href="#路由器基础--计网复习"><span class="icon icon-link"></span></a></h2>
+<h3 id="软路由">软路由<a aria-hidden="true" tabindex="-1" href="#软路由"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>负责 DHCP、NAT 等操作，相当于 AC。</li>
+<li>这一层可以直接设置 VPN。</li>
+</ul>
+<h3 id="硬路由">硬路由<a aria-hidden="true" tabindex="-1" href="#硬路由"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>只负责无线/有线连接设备，相当于 AP。</li>
+</ul>
+<h3 id="旁路由">旁路由<a aria-hidden="true" tabindex="-1" href="#旁路由"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>接在软路由或硬路由下，本身联通外网。</li>
+<li>在路由器/需翻墙设备中设置网关与 DNS 为旁路由 IP。</li>
+<li>Apple TV、局域网设备均可作为旁路由（建议长期开机的设备，如 Mac mini、Apple TV、NAS）。</li>
+<li>旁路由出问题时，网关改回主路由即可。</li>
+</ul>
+<h3 id="https-转发类似旁路由">HTTPS 转发（类似旁路由）<a aria-hidden="true" tabindex="-1" href="#https-转发类似旁路由"><span class="icon icon-link"></span></a></h3>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#D73A49">export</span><span style="color:#24292E"> http_proxy</span><span style="color:#D73A49">=</span><span style="color:#24292E">http://10.48.5.165:7890</span></span>
+<span class="line"><span style="color:#D73A49">export</span><span style="color:#24292E"> https_proxy</span><span style="color:#D73A49">=</span><span style="color:#24292E">$http_proxy</span></span>
+<span class="line"><span style="color:#D73A49">export</span><span style="color:#24292E"> ALL_PROXY</span><span style="color:#D73A49">=</span><span style="color:#24292E">$http_proxy</span></span></code></pre>
+<p>用途：</p>
+<ul>
+<li>电脑 VPN 开代理模式但终端没网，可临时转发。</li>
+<li>服务器无管理员权限，安装 Clash 复杂时可用。</li>
+<li>借用别人 VPN 时，对方开放 7890 端口即可访问。</li>
+</ul>
+<h3 id="pppoe">PPPoE<a aria-hidden="true" tabindex="-1" href="#pppoe"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>拨号，相当于光猫（通过网线而不是光纤）。</li>
+</ul>
+<h3 id="dhcp">DHCP<a aria-hidden="true" tabindex="-1" href="#dhcp"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>依托上级网络，上级有网就有网。</li>
+</ul>
+<h3 id="有线中继--bridge--ap">有线中继 / Bridge / AP<a aria-hidden="true" tabindex="-1" href="#有线中继--bridge--ap"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>关闭 DHCP 与 NAT，相当于校园网 AP。</li>
+<li>IP 地址分发走校园网 AC（类似直接连接 NJU-WLAN）。</li>
+<li>一个 AC 下接很多 AP，属于单一核心节点的辐射结构（区别于 Mesh）。</li>
+</ul>
+<h3 id="mesh">Mesh<a aria-hidden="true" tabindex="-1" href="#mesh"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>有主路由，但整体形成网状结构；有线/无线回程会自动寻路。</li>
+<li>有线组网时子路由相当于 AP，但 AP 不负责 DHCP/NAT。</li>
+<li>无线组网时新建局域网，WAN 通过无线传输。</li>
+</ul>
+<h3 id="蓝牙与蓝牙-mesh">蓝牙与蓝牙 Mesh<a aria-hidden="true" tabindex="-1" href="#蓝牙与蓝牙-mesh"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>蓝牙：点对点，依赖单一中心节点，超出范围即失效。</li>
+<li>蓝牙 Mesh：子节点可通信，覆盖更广。</li>
+</ul>
+<h3 id="nat">NAT<a aria-hidden="true" tabindex="-1" href="#nat"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>局域网设备通过路由器 IP 转发上网。</li>
+<li>虚拟机 guest IP 转发到物理机 host IP；电脑相当于路由器。</li>
+<li>可在 VMware/VirtualBox 映射虚拟机 22 端口到 localhost 高端口，便于 SSH。</li>
+</ul>
+<h3 id="桥接-bridge">桥接 Bridge<a aria-hidden="true" tabindex="-1" href="#桥接-bridge"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>虚拟机直接越过物理机，由路由器分配 IP（路由器 -> 物理机 -> 虚拟机）。</li>
+<li>设备直接越过路由器，由校园网分配 IP（校园网 -> 路由器 -> 设备）。</li>
+<li>设备直接获得公网 IP（IPv6 默认公网）。</li>
+</ul>
+<h3 id="nat-回环">NAT 回环<a aria-hidden="true" tabindex="-1" href="#nat-回环"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>guest<div></div> 映射到 host<div></div>，局域网其他设备可访问 host<div></div>。</li>
+<li>本机访问 host<div></div> 会走一个环路。</li>
+</ul>
+<h3 id="localhost-本地回环">localhost 本地回环<a aria-hidden="true" tabindex="-1" href="#localhost-本地回环"><span class="icon icon-link"></span></a></h3>
+<ul>
+<li>本机访问本机。</li>
+</ul>
+<h2 id="待验证">待验证<a aria-hidden="true" tabindex="-1" href="#待验证"><span class="icon icon-link"></span></a></h2>
+<ul>
+<li>测试电脑开梯子作为网关，让 Switch 走代理。</li>
+<li>测试蒲公英游戏组网。</li>
+</ul>
+<img src="router/DCAA2D48-2CE0-4F57-AE1F-C0E53C145353.jpeg" alt="客网日记" style="zoom: 25%;"> </article>  </main> <footer class="site-footer">Built with Astro.</footer> </body></html>

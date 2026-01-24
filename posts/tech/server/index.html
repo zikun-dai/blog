@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="实验室服务器配置指南的更新版，新增 Windows 和 WSL 的建议项"><title>server | Jake&#39;s Personal Blog</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet"><style>:root{color-scheme:light;--bg: #f7f3ee;--surface: #fffaf2;--text: #1c1a17;--muted: #6f665b;--accent: #c4572e;--border: #e4dccf;--shadow: 0 12px 30px rgba(30, 24, 18, .08);--callout-note: #f0f6ff;--callout-tip: #eefaf2;--callout-warning: #fff6e6;--callout-danger: #ffecec;--callout-important: #ffeef2;--callout-caution: #fff1db}*,*:before,*:after{box-sizing:border-box}body{margin:0;font-family:"Source Sans 3",Helvetica Neue,Arial,sans-serif;background:radial-gradient(circle at top left,#fdf7ef,#f7f3ee,#f1ebe2);color:var(--text);line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}header.site-header{padding:2.5rem 1.5rem 1.5rem;border-bottom:1px solid var(--border);background:#fffaf2e6;backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}.site-title{font-family:Spectral,Georgia,serif;font-weight:700;font-size:1.8rem;margin:0}.site-nav{margin-top:.75rem;display:flex;gap:1.25rem;flex-wrap:wrap;font-size:.95rem}main{max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem}.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.5rem;box-shadow:var(--shadow)}.post-list{display:grid;gap:1.25rem}.post-meta{color:var(--muted);font-size:.9rem}.post-title{font-family:Spectral,Georgia,serif;font-size:1.6rem;margin:.25rem 0 .5rem}.post-content{font-size:1.05rem}.post-hero{width:100%;height:auto;border-radius:16px;margin:1rem 0 1.25rem;display:block;object-fit:cover}.tag-list{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 0;padding:0;list-style:none}.tag{border:1px solid var(--border);border-radius:999px;padding:.2rem .7rem;font-size:.85rem;background:#fff}table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:2px solid var(--border);border-radius:12px;overflow:hidden}table thead th{text-align:left;font-weight:700;color:var(--text);padding:.8rem .9rem;border-right:2px solid var(--border);border-bottom:2px solid var(--border);background:#f1e7d8}table tbody td{padding:.75rem .9rem;border-right:2px solid var(--border);border-bottom:2px solid var(--border)}table thead th:last-child,table tbody td:last-child{border-right:none}table tbody tr:last-child td{border-bottom:none}.callout{border-left:4px solid var(--accent);padding:.75rem 1rem;border-radius:12px;margin:1rem 0;background:var(--callout-note)}.callout-tip{background:var(--callout-tip);border-left-color:#338a55}.callout-warning{background:var(--callout-warning);border-left-color:#d28b26}.callout-danger{background:var(--callout-danger);border-left-color:#c73b3b}.callout-important{background:var(--callout-important);border-left-color:#b54a3a}.callout-caution{background:var(--callout-caution);border-left-color:#c9851d}footer.site-footer{margin-top:4rem;color:var(--muted);font-size:.9rem;text-align:center;padding-bottom:2rem}@media(max-width:720px){header.site-header{position:static}.site-title{font-size:1.5rem}main{padding:1.5rem 1.25rem 3rem}}
+</style></head> <body> <header class="site-header"> <div class="site-title">Jake&#39;s Personal Blog</div> <nav class="site-nav"> <a href="/">Home</a> <a href="/tags/">Tags</a> <a href="/categories/">Categories</a> </nav> </header> <main>  <article class="card post-content"> <p class="post-meta"> 2026/1/16  </p> <h1 class="post-title">server</h1>  <ul class="tag-list"> <li class="tag">tech</li> </ul> <h1 id="服务器配置指南">服务器配置指南<a aria-hidden="true" tabindex="-1" href="#服务器配置指南"><span class="icon icon-link"></span></a></h1>
+<div class="callout callout-note"><p>把 Notion 里的 Miniconda 步骤等价替换为 Miniforge + mamba。
+原文链接：<a href="https://stingy-basin-115.notion.site/NJU-3DV-d9f0de862cbd4b9f9c12b5474cac76e1">NJU-3DV 实验室服务器使用与配置手册</a></p></div>
+<div class="callout callout-caution"><p>以下配置有问题，先不要用。</p></div>
+<h2 id="0-配置-vpn">0) 配置 VPN<a aria-hidden="true" tabindex="-1" href="#0-配置-vpn"><span class="icon icon-link"></span></a></h2>
+<ul>
+<li>直接开启 VPN 的 TUN 模式。</li>
+</ul>
+<div class="callout callout-tip">
+<p>尽量不要全局设置 http 环境变量；需要下载 HuggingFace、GitHub 时再开 TUN 模式最干净。
+也可以按需临时 export。</p>
+</div>
+<div class="callout callout-caution">
+<p>Windows 有时 TUN 用不了 Codex，可换节点；Mac 只能用代理模式（TUN 无网）；虚拟机只能用 TUN（代理用不了 AI）。</p>
+</div>
+<ul>
+<li>修改环境变量（按需）</li>
+</ul>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 最好加到 .bashrc</span></span>
+<span class="line"><span style="color:#D73A49">export</span><span style="color:#24292E"> http_proxy</span><span style="color:#D73A49">=</span><span style="color:#24292E">http://127.0.0.1:7890</span></span>
+<span class="line"><span style="color:#6A737D"># export http_proxy=http://10.48.5.165:7890  # server 端 Clash 允许局域网，client 可借网</span></span>
+<span class="line"><span style="color:#D73A49">export</span><span style="color:#24292E"> https_proxy</span><span style="color:#D73A49">=</span><span style="color:#24292E">$http_proxy</span></span>
+<span class="line"><span style="color:#D73A49">export</span><span style="color:#24292E"> ALL_PROXY</span><span style="color:#D73A49">=</span><span style="color:#24292E">$http_proxy</span></span></code></pre>
+<ul>
+<li>查看/清理环境变量</li>
+</ul>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># PowerShell</span></span>
+<span class="line"><span style="color:#24292E">$env:http_proxy</span></span>
+<span class="line"><span style="color:#24292E">$env:https_proxy</span></span>
+<span class="line"><span style="color:#24292E">$env:all_proxy</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># WSL/Ubuntu</span></span>
+<span class="line"><span style="color:#005CC5">echo</span><span style="color:#24292E"> $http_proxy</span></span>
+<span class="line"><span style="color:#005CC5">echo</span><span style="color:#24292E"> $https_proxy</span></span>
+<span class="line"><span style="color:#005CC5">echo</span><span style="color:#24292E"> $all_proxy</span></span></code></pre>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># Windows：在“用户环境变量”里清空后重开终端</span></span>
+<span class="line"><span style="color:#6A737D"># WSL/Ubuntu：在 .bashrc 删除相关项后 source ~/.bashrc 或重开终端</span></span></code></pre>
+<ul>
+<li>测试连通性</li>
+</ul>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">curl</span><span style="color:#032F62"> https://www.google.com</span></span>
+<span class="line"><span style="color:#6A737D"># ping 不走 http 协议，只有 TUN 模式能 ping 通</span></span></code></pre>
+<h2 id="1-安装-miniforge替代-miniconda">1) 安装 Miniforge（替代 Miniconda）<a aria-hidden="true" tabindex="-1" href="#1-安装-miniforge替代-miniconda"><span class="icon icon-link"></span></a></h2>
+<p>在 WSL2 / Ubuntu 终端执行：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#005CC5">cd</span><span style="color:#032F62"> ~</span></span>
+<span class="line"><span style="color:#6F42C1">mkdir</span><span style="color:#005CC5"> -p</span><span style="color:#032F62"> ~/miniforge3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6F42C1">wget</span><span style="color:#032F62"> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh</span><span style="color:#005CC5"> -O</span><span style="color:#032F62"> ~/miniforge3/miniforge.sh</span></span>
+<span class="line"><span style="color:#6F42C1">bash</span><span style="color:#032F62"> ~/miniforge3/miniforge.sh</span><span style="color:#005CC5"> -b</span><span style="color:#005CC5"> -u</span><span style="color:#005CC5"> -p</span><span style="color:#032F62"> ~/miniforge3</span></span>
+<span class="line"><span style="color:#6F42C1">rm</span><span style="color:#005CC5"> -f</span><span style="color:#032F62"> ~/miniforge3/miniforge.sh</span></span></code></pre>
+<blockquote>
+<p>说明：Miniforge 默认使用 conda-forge，并提供 <code>conda</code>/<code>mamba</code> 命令。</p>
+</blockquote>
+<h2 id="2-初始化解决-conda-command-not-found">2) 初始化（解决 conda: command not found）<a aria-hidden="true" tabindex="-1" href="#2-初始化解决-conda-command-not-found"><span class="icon icon-link"></span></a></h2>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#D73A49">~</span><span style="color:#24292E">/miniforge3/bin/conda init bash</span></span>
+<span class="line"><span style="color:#6A737D"># ~/miniconda3/bin/conda init bash  # 切换 miniconda3/miniforge3，只影响 ~/.bashrc</span></span>
+<span class="line"><span style="color:#005CC5">exec</span><span style="color:#032F62"> bash</span></span></code></pre>
+<div class="callout callout-caution">
+<p>Miniforge 可能出现 <code>Failed to connect to repo.anaconda.com port 443</code>（安装 scan2BIM 时）。
+创建普通 py313_env 一般没问题。</p>
+</div>
+<p>如果 <code>mamba activate</code> 报错：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">mamba</span><span style="color:#032F62"> shell</span><span style="color:#032F62"> init</span><span style="color:#005CC5"> --shell</span><span style="color:#032F62"> bash</span><span style="color:#005CC5"> --root-prefix=</span><span style="color:#D73A49">~</span><span style="color:#005CC5">/.local/share/mamba</span></span>
+<span class="line"><span style="color:#005CC5">source</span><span style="color:#032F62"> ~/.bashrc</span></span></code></pre>
+<h2 id="最小修复conda-仍找不到">最小修复：conda 仍找不到<a aria-hidden="true" tabindex="-1" href="#最小修复conda-仍找不到"><span class="icon icon-link"></span></a></h2>
+<p>一般是 PATH 没生效，可在 <code>~/.bashrc</code> 加：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#D73A49">export</span><span style="color:#24292E"> PATH</span><span style="color:#D73A49">=</span><span style="color:#032F62">"</span><span style="color:#24292E">$HOME</span><span style="color:#032F62">/miniforge3/bin:</span><span style="color:#24292E">$PATH</span><span style="color:#032F62">"</span></span></code></pre>
+<p>然后：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#005CC5">source</span><span style="color:#032F62"> ~/.bashrc</span></span>
+<span class="line"><span style="color:#6F42C1">conda</span><span style="color:#032F62"> init</span><span style="color:#032F62"> bash</span></span>
+<span class="line"><span style="color:#005CC5">exec</span><span style="color:#032F62"> bash</span></span></code></pre>
+<h2 id="创建与管理环境">创建与管理环境<a aria-hidden="true" tabindex="-1" href="#创建与管理环境"><span class="icon icon-link"></span></a></h2>
+<ul>
+<li>创建环境</li>
+</ul>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">mamba</span><span style="color:#032F62"> create</span><span style="color:#005CC5"> -n</span><span style="color:#032F62"> nju3dv</span><span style="color:#032F62"> python=</span><span style="color:#005CC5">3.10</span></span></code></pre>
+<ul>
+<li>更新环境</li>
+</ul>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 先激活环境，或指定 -n scan2bim</span></span>
+<span class="line"><span style="color:#6A737D"># 需要严格对齐 yml（会删除未提及依赖），加 --prune</span></span>
+<span class="line"><span style="color:#6F42C1">mamba</span><span style="color:#032F62"> env</span><span style="color:#032F62"> update</span><span style="color:#005CC5"> -f</span><span style="color:#032F62"> scan2bim.cu116.yml</span></span></code></pre>
+<ul>
+<li>删除环境</li>
+</ul>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">mamba</span><span style="color:#032F62"> env</span><span style="color:#032F62"> remove</span><span style="color:#005CC5"> -n</span><span style="color:#032F62"> scan2bim</span></span></code></pre>
+<ul>
+<li>激活建议用 conda（更兼容各种 shell）</li>
+</ul>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">conda</span><span style="color:#032F62"> activate</span><span style="color:#032F62"> nju3dv</span></span></code></pre>
+<ul>
+<li>安装依赖（mamba 更快）</li>
+</ul>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">mamba</span><span style="color:#032F62"> install</span><span style="color:#032F62"> numpy</span><span style="color:#032F62"> scipy</span></span></code></pre>
+<h2 id="安装依赖">安装依赖<a aria-hidden="true" tabindex="-1" href="#安装依赖"><span class="icon icon-link"></span></a></h2>
+<h3 id="配置-channels">配置 channels<a aria-hidden="true" tabindex="-1" href="#配置-channels"><span class="icon icon-link"></span></a></h3>
+<p>编辑 <code>~/miniforge3/.condarc</code>：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#22863A">channels</span><span style="color:#24292E">:</span></span>
+<span class="line"><span style="color:#24292E">  - </span><span style="color:#032F62">conda-forge</span></span>
+<span class="line"><span style="color:#24292E">  - </span><span style="color:#032F62">pytorch</span></span>
+<span class="line"><span style="color:#24292E">  - </span><span style="color:#032F62">nvidia</span></span>
+<span class="line"><span style="color:#24292E">  - </span><span style="color:#032F62">defaults</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A">show_channel_urls</span><span style="color:#24292E">: </span><span style="color:#005CC5">true</span></span>
+<span class="line"><span style="color:#22863A">channel_priority</span><span style="color:#24292E">: </span><span style="color:#032F62">strict</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A">default_channels</span><span style="color:#24292E">:</span></span>
+<span class="line"><span style="color:#24292E">  - </span><span style="color:#032F62">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span></span>
+<span class="line"><span style="color:#24292E">  - </span><span style="color:#032F62">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r</span></span>
+<span class="line"><span style="color:#24292E">  - </span><span style="color:#032F62">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A">custom_channels</span><span style="color:#24292E">:</span></span>
+<span class="line"><span style="color:#22863A">  conda-forge</span><span style="color:#24292E">: </span><span style="color:#032F62">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span></span>
+<span class="line"><span style="color:#22863A">  pytorch</span><span style="color:#24292E">: </span><span style="color:#032F62">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span></span>
+<span class="line"><span style="color:#22863A">  nvidia</span><span style="color:#24292E">: </span><span style="color:#032F62">https://mirrors.sustech.edu.cn/anaconda-extra/cloud</span></span></code></pre>
+<h3 id="pip-源">pip 源<a aria-hidden="true" tabindex="-1" href="#pip-源"><span class="icon icon-link"></span></a></h3>
+<p>编辑 <code>~/.config/pip/pip.conf</code>，或直接运行：</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">pip</span><span style="color:#032F62"> config</span><span style="color:#032F62"> set</span><span style="color:#032F62"> global.index-url</span><span style="color:#032F62"> https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple</span></span>
+<span class="line"><span style="color:#6F42C1">pip</span><span style="color:#032F62"> config</span><span style="color:#032F62"> set</span><span style="color:#032F62"> global.extra-index-url</span><span style="color:#032F62"> https://pypi.org/simple</span></span></code></pre>
+<h1 id="删除-miniforge3">删除 Miniforge3<a aria-hidden="true" tabindex="-1" href="#删除-miniforge3"><span class="icon icon-link"></span></a></h1>
+<h2 id="0-确认安装目录">0) 确认安装目录<a aria-hidden="true" tabindex="-1" href="#0-确认安装目录"><span class="icon icon-link"></span></a></h2>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">conda</span><span style="color:#032F62"> info</span><span style="color:#005CC5"> --base</span></span></code></pre>
+<p>记录输出路径（如 <code>/home/wsl-jake/miniforge3</code>）。</p>
+<h2 id="1-可选备份环境列表">1) 可选：备份环境列表<a aria-hidden="true" tabindex="-1" href="#1-可选备份环境列表"><span class="icon icon-link"></span></a></h2>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">conda</span><span style="color:#032F62"> env</span><span style="color:#032F62"> list</span></span>
+<span class="line"><span style="color:#6A737D"># conda env export -n &#x3C;envname> > &#x3C;envname>.yml</span></span></code></pre>
+<h2 id="2-撤销-conda-init">2) 撤销 conda init<a aria-hidden="true" tabindex="-1" href="#2-撤销-conda-init"><span class="icon icon-link"></span></a></h2>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">conda</span><span style="color:#032F62"> init</span><span style="color:#005CC5"> --reverse</span><span style="color:#032F62"> bash</span></span>
+<span class="line"><span style="color:#005CC5">exec</span><span style="color:#032F62"> bash</span></span></code></pre>
+<blockquote>
+<p>zsh 把 <code>bash</code> 换成 <code>zsh</code>。</p>
+</blockquote>
+<p>如果 conda 已不可用：手动编辑 <code>~/.bashrc</code>，删除整段：</p>
+<ul>
+<li><code># >>> conda initialize >>></code></li>
+<li><code># &#x3C;&#x3C;&#x3C; conda initialize &#x3C;&#x3C;&#x3C;</code></li>
+</ul>
+<h2 id="3-删除安装目录">3) 删除安装目录<a aria-hidden="true" tabindex="-1" href="#3-删除安装目录"><span class="icon icon-link"></span></a></h2>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">rm</span><span style="color:#005CC5"> -rf</span><span style="color:#032F62"> ~/miniforge3</span></span></code></pre>
+<h2 id="4-清理残留">4) 清理残留<a aria-hidden="true" tabindex="-1" href="#4-清理残留"><span class="icon icon-link"></span></a></h2>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">rm</span><span style="color:#005CC5"> -f</span><span style="color:#032F62"> ~/.condarc</span></span>
+<span class="line"><span style="color:#6F42C1">rm</span><span style="color:#005CC5"> -rf</span><span style="color:#032F62"> ~/.conda</span><span style="color:#032F62"> ~/.mamba</span></span></code></pre>
+<h2 id="5-验证">5) 验证<a aria-hidden="true" tabindex="-1" href="#5-验证"><span class="icon icon-link"></span></a></h2>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#005CC5">which</span><span style="color:#032F62"> conda</span></span>
+<span class="line"><span style="color:#6F42C1">conda</span><span style="color:#005CC5"> --version</span></span>
+<span class="line"><span style="color:#6F42C1">mamba</span><span style="color:#005CC5"> --version</span></span></code></pre> </article>  </main> <footer class="site-footer">Built with Astro.</footer> </body></html>
